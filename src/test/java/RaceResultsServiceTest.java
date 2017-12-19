@@ -59,5 +59,15 @@ public class RaceResultsServiceTest {
         verify(clientA, never()).receive(message);
     }
 
+    @Test
+    public void subscribedToCategoryClientShouldReceiveMessageOfTheSameCategory() {
+        raceResults.addSubscriber(clientA, Category.F1_RACES);
+        message.setCategory(Category.F1_RACES);
+
+        raceResults.send(message);
+
+        verify(clientA).receive(message);
+    }
+
 
 }

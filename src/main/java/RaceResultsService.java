@@ -18,4 +18,8 @@ public class RaceResultsService {
     public void removeSubscriber(Client clientA) {
         clients.remove(clientA);
     }
+
+    public void addSubscriber(Client client, Category category) {
+
+    }
 }
