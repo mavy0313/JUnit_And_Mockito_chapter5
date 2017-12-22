@@ -11,15 +11,13 @@ public class RaceResultsService {
 
     public void send(Message message) {
         for (Client client : clients) {
-            client.receive(message);
+            if (client.getCategories().contains(message.getCategory())) {
+                client.receive(message);
+            }
         }
     }
 
     public void removeSubscriber(Client clientA) {
         clients.remove(clientA);
-    }
-
-    public void addSubscriber(Client client, Category category) {
-
     }
 }
