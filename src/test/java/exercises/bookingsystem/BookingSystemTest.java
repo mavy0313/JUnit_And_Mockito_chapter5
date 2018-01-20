@@ -36,4 +36,34 @@ public class BookingSystemTest {
         assertTrue(bookingSystem.getAvailableClassrooms("Mon", "8:00").contains(classroomA1));
         assertTrue(bookingSystem.getAvailableClassrooms("Mon", "8:00").contains(classroomA2));
     }
+
+    @Test
+    public void should_Book_Specific_Classroom_By_Name() {
+        Classroom classroomA1 = new Classroom("A1", 10);
+
+        BookingSystem bookingSystem = new BookingSystem();
+        bookingSystem.addClassroom(classroomA1);
+
+        BookingTime bookingTime = new BookingTime("Mon", "8:00");
+
+        bookingSystem.book("A1", bookingTime);
+
+        assertTrue(classroomA1.isBooked());
+        assertTrue(bookingSystem.getBookedClassrooms(bookingTime).contains(classroomA1));
+    }
+
+    @Test
+    public void should_Book_Specific_Classroom_By_Constraints() {
+        Classroom classroomA1 = new Classroom("A1", 20, Equipment.PROJECTOR);
+
+        BookingSystem bookingSystem = new BookingSystem();
+        bookingSystem.addClassroom(classroomA1);
+
+        BookingTime bookingTime = new BookingTime("Mon", "8:00");
+
+        bookingSystem.book(20, Equipment.PROJECTOR, bookingTime);
+
+        assertTrue(classroomA1.isBooked());
+        assertTrue(bookingSystem.getBookedClassrooms(bookingTime).contains(classroomA1));
+    }
 }
